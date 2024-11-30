@@ -1,0 +1,13 @@
+// listagem de vendas teste inicial
+
+// Parei com tudo funcionando
+
+// o que devo ajustar é;
+    // Adicionar o listar vendas;
+    // criar o cadastro de funcionários;
+    // editar fucionário e apagar funcionário;
+    // Assim como fiz em produtos.
+    // criar tela de login 
+
+
+    // Já criei a tabela de funcionários   27/11 01:03

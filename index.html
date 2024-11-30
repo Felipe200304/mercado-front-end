@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+
+<body class="centralizar">
+
+    <!-- Tela Inicial -->
+    <div id="tela-inicial" class="container secao">
+        <h1 class="container__titulo">Sistema de Controle</h1>
+        <div class="botoes">
+            <button class="botao__estoque-caixa" onclick="mostrarSecao('tela-estoque')">Estoque</button>
+            <button class="botao__estoque-caixa" onclick="mostrarSecao('tela-vendas')">Vendas</button>
+            <!-- Botão Funcionário -->
+            <button class="botao__estoque-caixa" onclick="mostrarSecao('tela-funcionario')">Funcionário</button>
+        </div>
+    </div>
+
+    <!-- Tela Estoque -->
+    <div id="tela-estoque" class="secao hidden">
+        <h1>Estoque</h1>
+        <div class="botoes-estoque">
+            <button id="botao-cadastrar-item" class="botao__estoque" onclick="mostrarSecao('cadastro-item')">Cadastrar
+                Item</button>
+            <button id="botao-listar-produtos" class="botao__estoque"
+                onclick="listarProdutos(); mostrarSecao('listar-produtos')">Visualizar Estoque</button>
+            <button class="botao__voltar" onclick="mostrarSecao('tela-inicial')">Voltar</button>
+        </div>
+    </div>
+
+    <!-- Tela Cadastrar Item -->
+    <div id="cadastro-item" class="secao hidden">
+        <h1>Cadastrar Produto</h1>
+        <form id="form-cadastro">
+            <label for="nomeProduto">Nome do Produto:</label>
+            <input type="text" id="nomeProduto" name="nomeProduto" required>
+
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" name="codigo" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" required></textarea>
+
+            <label for="quantidade">Quantidade:</label>
+            <input type="text" id="quantidade" name="quantidade" required>
+
+            <label for="custo">Preço de Custo:</label>
+            <input type="text" id="custo" name="custo" step="0.01" required>
+
+            <label for="precoSugerido">Preço Sugerido:</label>
+            <input type="text" id="precoSugerido" name="precoSugerido" readonly required>
+
+            <label for="percentualLucro">Percentual de Lucro (%):</label>
+            <input type="text" id="percentualLucro" name="percentualLucro" step="0.01" required>
+
+            <label for="valorVenda">Valor de Venda:</label>
+            <input type="text" id="valorVenda" name="valorVenda" step="0.01" required>
+
+            <label for="categoria">Categoria:</label>
+            <input type="text" id="categoria" name="categoria" required>
+
+            <button type="submit">Cadastrar</button>
+            <button type="button" class="botao__voltar" onclick="mostrarSecao('tela-estoque')">Voltar</button>
+        </form>
+    </div>
+
+    <!-- Tela Listar Produtos -->
+    <div id="listar-produtos" class="secao hidden">
+        <h1>Lista de Produtos</h1>
+        <div id="lista-produtos"></div>
+        <button class="botao__voltar" onclick="mostrarSecao('tela-inicial')">Voltar</button>
+    </div>
+
+    <!-- Tela Vendas -->
+    <div id="tela-vendas" class="secao hidden">
+        <h1>Caixa - Vendas</h1>
+
+        <!-- Botões para Listar e Visualizar Vendas -->
+        <div class="botoes-vendas">
+            <button class="botao__estoque botao-listar-vendas"
+                onclick="listarVendas(); mostrarSecao('lista-vendas')">Visualizar Vendas</button>
+        </div>
+
+        <!-- Formulário de adicionar produto ao carrinho -->
+        <form id="form-buscar-produto" onsubmit="event.preventDefault();">
+            <label for="codigo">Código do Produto:</label>
+            <input type="text" id="codigo_1" name="codigo" required>
+            <button type="button" onclick="adicionarProdutoAoCarrinho()">Adicionar</button>
+        </form>
+
+        <h2>Itens da Compra</h2>
+        <div id="carrinho"></div>
+
+        <p><strong>Total:</strong> R$ <span id="total-compra">0.00</span></p>
+
+        <div id="troco-container">
+            <label for="valor-recebido"><strong>Valor Recebido:</strong></label>
+            <input type="text" id="valor-recebido" placeholder="Digite o valor recebido" oninput="atualizarTroco()"
+                required>
+            <p><strong>Troco:</strong> R$ <span id="troco">0.00</span></p>
+        </div>
+
+        <button type="button" onclick="finalizarVenda()">Finalizar Venda</button>
+        <button type="button" class="botao__voltar" onclick="mostrarSecao('tela-inicial')">Voltar</button>
+    </div>
+
+    <!-- Seção Editar Vendas -->
+    <div id="editar-vendas-container" class="secao hidden">
+        <h2>Editar Vendas</h2>
+        <div id="lista-editar-vendas-container" class=""></div>
+        <button type="button" class="botao__voltar" onclick="mostrarSecao('lista-vendas')">Voltar</button>
+    </div>
+
+    <!-- Seção Listar Vendas -->
+    <div id="lista-vendas" class="secao hidden">
+        <h2>Lista de Vendas</h2>
+        <div id="listar-vendas-container"></div>
+        <button class="botao__voltar" onclick="mostrarSecao('tela-vendas')">Voltar</button>
+    </div>
+
+    <!-- Tela Funcionário -->
+    <div id="tela-funcionario" class="secao hidden">
+        <h1>Gestão de Funcionários</h1>
+        <div class="botoes-funcionario">
+            <button class="botao__estoque" onclick="mostrarSecao('cadastro-funcionario')">Cadastrar Funcionário</button>
+            <button class="botao__estoque" onclick="mostrarSecao('listar-funcionarios')">Visualizar
+                Funcionários</button>
+            <button class="botao__voltar" onclick="mostrarSecao('tela-inicial')">Voltar</button>
+        </div>
+    </div>
+
+    <!-- Tela Cadastrar Funcionário -->
+    <div id="cadastro-funcionario" class="secao hidden">
+        <h1>Cadastrar Funcionário</h1>
+        <form id="form-cadastro-funcionario">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" required>
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="senha">Senha:</label>
+            <input type="text" id="senha" name="senha" required>
+
+            <label for="permissao">Permissão:</label>
+            <input type="text" id="permissao" name="permissao" required>
+
+            <label for="horasTrabalhadas">Horas Trabalhadas:</label>
+            <input type="number" id="horasTrabalhadas" name="horasTrabalhadas" required>
+
+
+            <label for="salario220h">Salário 220h:</label>
+            <input type="number" id="salario220h" name="salario220h" step="0.01" required>
+
+
+
+            <button type="submit">Cadastrar</button>
+            <button type="button" class="botao__voltar" onclick="mostrarSecao('tela-funcionario')">Voltar</button>
+        </form>
+    </div>
+
+    <!-- Tela Listar Funcionários -->
+    <div id="listar-funcionarios" class="secao hidden">
+        <h1>Lista de Funcionários</h1>
+        <div id="lista-funcionarios"></div>
+        <button class="botao__voltar" onclick="mostrarSecao('tela-funcionario')">Voltar</button>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html>

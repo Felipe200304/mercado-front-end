@@ -1,0 +1,191 @@
+/* Estilos globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #2acfcf;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    text-align: center;
+}
+
+/* Centralização */
+.centralizar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Cartões e Seções */
+.secao {
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.secao:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+.container__titulo {
+    font-size: 2rem;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Botões */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+.botao__estoque-caixa {
+    background: #5865f2;
+    color: #fff;
+}
+
+.botao__estoque {
+    background: #2acfcf;
+    color: #fff;
+}
+
+.botao__voltar {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+button[type="submit"] {
+    background: #28c76f;
+    color: #fff;
+}
+
+button[type="submit"]:hover {
+    background: #22a764;
+}
+
+/* Formulários */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #5865f2;
+    box-shadow: 0 0 5px rgba(88, 101, 242, 0.3);
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+/* Tabelas */
+.table-wrapper {
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 15px;
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.table-wrapper th {
+    background: #5865f2;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px;
+    font-size: 1rem;
+    border-bottom: 2px solid #ddd;
+}
+
+.table-wrapper td {
+    padding: 10px;
+    border-bottom: 1px solid #e3e3e3;
+    color: #4a4a4a;
+}
+
+.table-wrapper tr:hover {
+    background: #f9f9ff;
+}
+
+.table-wrapper tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+/* Total de compras e troco */
+#total-compra, #troco {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #28c76f;
+    margin-top: 15px;
+    text-align: right;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .secao {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .container__titulo {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
